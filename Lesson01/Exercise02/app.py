@@ -27,6 +27,11 @@ recipes = [
 # Переменная recipes содержит список??? [], внутри, которого словарь {}
 
 
+@app.route("/")  # http://127.0.0.1:5000/
+def hello():
+    return "Hello World!"
+
+
 @app.route('/recipes', methods=['GET'])
 def get_recipes():
     return jsonify({'data': recipes})

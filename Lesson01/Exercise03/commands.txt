@@ -1,0 +1,40 @@
+ # Здесь мы используем две программы? httpie и curl для отправки запросов к нашему серверу?
+ # У httpie проще синтаксис, но curl, насколько я понял более мощный инструмент.
+
+http GET localhost:5000/recipes # тут все просто
+
+curl -i -X GET localhost:5000/recipes
+# -i is for showing the header in the response and
+# -X is for specifying the HTTP method
+
+
+
+http POST localhost:5000/recipes name="Cheese Pizza" description="This is a lovely cheese pizza"
+
+curl -i -X POST localhost:5000/recipes -H "Content-Type: application/json" -d '{"name":"Cheese Pizza", "description":"This is a lovely cheese pizza"}'
+# -H here is to specify the header in the request
+# -d here is to specify the HTTP POST data, which is our new recipe
+
+
+
+http GET localhost:5000/recipes
+
+curl -i -X GET localhost:5000/recipes
+
+
+
+http PUT localhost:5000/recipes/3 name="Lovely Cheese Pizza" description="This is a lovely cheese pizza recipe."
+
+curl -i -X PUT localhost:5000/recipes/3 -H "Content-Type: application/json" -d '{"name":"Lovely Cheese Pizza", "description":"This is a lovely cheese pizza recipe."}'
+
+
+
+http GET localhost:5000/recipes/3
+
+curl -i -X GET localhost:5000/recipes/3
+
+
+
+http GET localhost:5000/recipes/101
+
+curl -i -X GET localhost:5000/recipes/101
