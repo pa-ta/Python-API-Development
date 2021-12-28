@@ -34,7 +34,9 @@ def hello():
 
 @app.route('/recipes', methods=['GET'])
 def get_recipes():
-    return jsonify({'data': recipes})
+    return jsonify({'data': recipes})  # возвращает в формате JSON репрезентацию аргументов функции
+    # jsonify function to convert the list of recipes to JSON format and respond to the client:
+    # можно записать просто как return jsonify(recipes) ???
 
 
 @app.route('/recipes/<int:recipe_id>', methods=['GET'])
@@ -45,6 +47,9 @@ def get_recipe(recipe_id):
 
     # recipe for recipe in recipes if recipe['id'] == recipe_id
     # Это генератор, который позволяет в одну строку создать список, наполненный значениями
+    # the line for recipe in recipes iterates through all the recipes in our recipe collection
+    # and finds out the recipe with id = recipe_id. Once we have found it, we store it in the iterator
+    # and retrieve it using the next function.
 
     if recipe:
         return jsonify(recipe)
@@ -55,6 +60,10 @@ def get_recipe(recipe_id):
 @app.route('/recipes', methods=['POST'])
 def create_recipe():
     data = request.get_json()
+    # request.get_json method to get the name and description from the client POST request.
+    # Flask предоставляет метод request.get_json(), чтобы извлечь JSON из запроса и вернуть его в виде структуры Python.
+    # Этот метод возвращает None, если данные JSON не найдены в запросе, поэтому я могу гарантировать, что я всегда
+    # получаю словарь, используя запрос request.get_json()
 
     name = data.get('name')
     description = data.get('description')
@@ -87,6 +96,19 @@ def update_recipe(recipe_id):
     )
 
     return jsonify(recipe)
+
+
+@app.route('/recipes/<int:recipe_id>', methods=['DELETE'])
+def delete_recipe(recipe_id):
+    recipe = next((recipe for recipe in recipes if recipe['id'] == recipe_id), None)
+
+    if not recipe:
+        return jsonify({'message': 'recipe not found'}), HTTPStatus.NOT_FOUND
+
+    recipes.remove(recipe)
+
+    return jsonify({'message': 'recipe deleted'}), HTTPStatus.NO_CONTENT
+
 
 
 if __name__ == '__main__':
