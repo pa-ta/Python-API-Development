@@ -1,0 +1,5 @@
+http GET localhost:5000/recipes
+
+# -i is for showing the header in the response and
+# -X is for specifying the HTTP method
+curl -i -X GET localhost:5000/recipes

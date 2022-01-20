@@ -1,0 +1,8 @@
+http PUT localhost:5000/recipes/1/publish
+
+# -i is for showing the header in the response and
+# -X is for specifying the HTTP method
+curl -i -X PUT localhost:5000/recipes/1/publish
+
+http GET localhost:5000/recipes
+curl -i -X GET localhost:5000/recipes
