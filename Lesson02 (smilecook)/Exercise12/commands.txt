@@ -1,0 +1,7 @@
+http POST localhost:5000/recipes name="Tomato Pasta" description="This is a lovely tomato pasta recipe" num_of_servings:=3 cook_time:=20 directions="This is how you make it"
+
+# -i is for showing the header in the response and
+# -X is for specifying the HTTP method
+# -H argument is used to specify the header in the client request. We will set Content-Type: application/json as the header here.
+# -d argument is used for HTTP POST data
+curl -i -X POST localhost:5000/recipes -H "Content-Type: application/json" -d '{"name":"Tomato Pasta", "description":"This is a lovely tomato pasta recipe", "num_of_servings":3, "cook_time":20, "directions":"This is how you make it"}'
